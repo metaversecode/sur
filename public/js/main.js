@@ -185,6 +185,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ── Dropdown Toggle ────────────────────────────────────
+  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const dropdown = toggle.closest('.dropdown');
+      
+      // Close other dropdowns
+      document.querySelectorAll('.dropdown').forEach(d => {
+        if (d !== dropdown) d.classList.remove('active');
+      });
+      
+      dropdown.classList.toggle('active');
+      const isExpanded = dropdown.classList.contains('active');
+      toggle.setAttribute('aria-expanded', isExpanded);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown').forEach(d => {
+        d.classList.remove('active');
+        const toggle = d.querySelector('.dropdown-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
   // ── Staggered card animations ──────────────────────────
   document.querySelectorAll('.person-card').forEach((card, i) => {
     card.style.animationDelay = `${i * 0.06}s`;

@@ -215,6 +215,84 @@ button {
   color: var(--accent-light);
 }
 
+/* ── Dropdown Menu ─────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: all var(--duration) var(--ease);
+  cursor: pointer;
+}
+
+.dropdown-toggle:hover,
+.dropdown.active .dropdown-toggle {
+  background: var(--bg-glass-hover);
+  color: var(--accent-light);
+}
+
+.dropdown-toggle svg {
+  transition: transform var(--duration) var(--ease);
+}
+
+.dropdown.active .dropdown-toggle svg {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 200px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--duration) var(--ease);
+  box-shadow: var(--shadow);
+  z-index: 150;
+}
+
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--duration) var(--ease);
+}
+
+.dropdown-item:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text);
+}
+
 /* ── Hamburger Menu Toggle ────────────────── */
 .menu-toggle {
   display: flex;
@@ -1066,6 +1144,19 @@ button {
 @media (max-width: 768px) {
   .nav {
     padding: 12px 16px;
+  }
+
+  .nav-right {
+    gap: 12px;
+  }
+
+  .dropdown-toggle {
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+
+  .dropdown-toggle svg {
+    display: none;
   }
 
   .nav-logo {
